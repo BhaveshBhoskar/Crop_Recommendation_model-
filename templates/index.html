@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Prediction System</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #0d1117;    /* Dark Mode */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #161b22;
+            padding: 35px;
+            width: 450px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 0px 20px #00000088;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #58a6ff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin: 8px;
+            background: #21262d;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        button {
+            width: 45%;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: #238636;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 12px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        button:hover {
+            background: #2ea043;
+        }
+
+        .default-btn {
+            background: #8957e5;
+        }
+
+        .default-btn:hover {
+            background: #a371f7;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #79c0ff;
+        }
+    </style>
+
+    <script>
+        function fillDefaults() {
+            document.getElementsByName("N")[0].value = 90;
+            document.getElementsByName("P")[0].value = 40;
+            document.getElementsByName("K")[0].value = 40;
+            document.getElementsByName("temperature")[0].value = 25;
+            document.getElementsByName("humidity")[0].value = 80;
+            document.getElementsByName("ph")[0].value = 79;
+            document.getElementsByName("rainfall")[0].value = 100;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Smart Crop Prediction</h1>
+
+        <form action="/predict" method="POST">
+            <input type="number" name="N" placeholder="Nitrogen (N)">
+            <input type="number" name="P" placeholder="Phosphorous (P)">
+            <input type="number" name="K" placeholder="Potassium (K)">
+            <input type="number" name="temperature" placeholder="Temperature (°C)">
+            <input type="number" name="humidity" placeholder="Humidity (%)">
+            <input type="number" name="ph" placeholder="pH Value">
+            <input type="number" name="rainfall" placeholder="Rainfall (mm)">
+
+            <div>
+                <button type="button" class="default-btn" onclick="fillDefaults()">Default Values</button>
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+
+        {% if result %}
+            <div class="result">{{ result }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
